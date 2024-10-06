@@ -46,7 +46,7 @@ able solar energy to power the LED’s during daytime with a backup power source
 <details>
   <summary>Detail</summary>
   
- 
+ ![TraCCS-Block Diagram]()
 
 </details>
 
