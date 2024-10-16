@@ -55,7 +55,23 @@ able solar energy to power the LED’s during daytime with a backup power source
 <details>
   <summary>Detail</summary>
 
-  > The 4-way traffic light controller operates in a cyclic sequence to manage traffic for both North-South (NS) and East-West (EW) directions, adjusting the green light duration based on traffic conditions.The system starts by resetting, ensuring all lights are in their initial states—NS or EW red. Based on the inputs for traffic conditions (low, moderate, high) for both NS and EW, the system determines the duration of the green light for each direction. There are nine possible combinations of traffic, from low-low to high-high. The NS traffic light turns green for a duration corresponding to the traffic (7 units for low, 14 for moderate, and 21 for high). The EW light remains red during this period. After the green light, NS turns yellow for 1 unit of time. Next, the EW light turns green, with a duration based on the EW traffic condition, while NS remains red. The EW light turns yellow for 1 unit before switching back to red. The process repeats, adjusting the green light duration for each direction according to the real-time traffic conditions. For an inavlid input we feeded the system to take the M-M, Moderate-Moderate Value of Traffic.
+  > The 4-way traffic light controller operates in a cyclic sequence to manage traffic for both North-South (NS) and East-West (EW) directions, adjusting the green light duration based on traffic conditions.
+
+>>Reset: The system starts by resetting, ensuring all lights are in their initial states—NS or EW red.
+
+>>Traffic Condition Detection: Based on the inputs for traffic conditions (low, moderate, high) for both NS and EW, the system determines the duration of the green light for each direction. There are nine possible combinations of traffic, from low-low to high-high.
+
+>>NS Green: The NS traffic light turns green for a duration corresponding to the traffic (7 units for low, 14 for moderate, and 21 for high). The EW light remains red during this period.
+
+>>NS Yellow: After the green light, NS turns yellow for 1 unit of time.
+
+>>EW Green: Next, the EW light turns green, with a duration based on the EW traffic condition, while NS remains red.
+
+>>EW Yellow: The EW light turns yellow for 1 unit before switching back to red.
+
+>>Cycle Repeats: The process repeats, adjusting the green light duration for each direction according to the real-time traffic conditions.
+
+>>NOTE : For an inavlid input we feeded the system to take the M-M, Moderate-Moderate Value of Traffic.
 </details>
 
 <!-- Fourth Section -->
