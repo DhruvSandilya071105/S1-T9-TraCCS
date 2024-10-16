@@ -65,7 +65,7 @@ able solar energy to power the LED’s during daytime with a backup power source
   <details>
   <summary>TraCCS Main Circuit Module</summary>
 
-  > 
+  > ![MAIN](https://github.com/user-attachments/assets/3f7d2c50-fc73-4be7-aa55-b65db5513329)
 </details>
 <details>
   <summary>Sub-Modules of TraCCS</summary>
@@ -87,7 +87,7 @@ able solar energy to power the LED’s during daytime with a backup power source
 <details>
   <summary>Moderate traffic-Low traffic Module</summary>
 
-  > 
+  > ![mod low](https://github.com/user-attachments/assets/6fda2c38-1cc5-4e33-8574-ba02887d9e18)
 </details>
 <details>
   <summary>Moderate traffic-Moderate traffic Module</summary>
