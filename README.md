@@ -62,6 +62,46 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Logisim Circuit Diagram
 <details>
   <summary>Detail</summary>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
+<details>
+  <summary>Detail</summary>
+
+  > 
+</details>
 
   > 
 </details>
