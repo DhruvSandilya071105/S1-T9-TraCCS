@@ -63,61 +63,63 @@ able solar energy to power the LED’s during daytime with a backup power source
 <details>
   <summary>Detail</summary>
   <details>
-  <summary>Detail</summary>
+  <summary>TraCCS Main Circuit Module</summary>
 
   > 
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Sub-Modules of TraCCS</summary>
+<details>
+  <summary>Low traffic-Low traffic Module</summary>
 
   > ![low-low](https://github.com/user-attachments/assets/7e7a4ce4-b692-4e2d-b4dc-f478c0dfee2f)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Low traffic-Moderate traffic Module</summary>
 
   > ![low mod](https://github.com/user-attachments/assets/c91771e5-921c-4766-aeb0-0385b18526e9)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Low traffic-High traffic Module</summary>
 
   > ![low high](https://github.com/user-attachments/assets/505beb3d-dbd8-4662-af7b-6ab8073bca21)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Moderate traffic-Low traffic Module</summary>
 
   > 
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Moderate traffic-Moderate traffic Module</summary>
 
   > ![mod-mod](https://github.com/user-attachments/assets/8508e5e6-9be2-4f6d-92fb-802988d1a3e4)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Moderate traffic-High traffic Module</summary>
 
   > ![mod high](https://github.com/user-attachments/assets/e7f8340a-4802-4d41-9e74-507d1b16b459)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>High traffic-Low traffic Module</summary>
 
   > ![high low](https://github.com/user-attachments/assets/8974006f-f2fd-4d94-9a33-8c946101d428)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>High traffic-Moderate traffic Module</summary>
 
   > ![high mod](https://github.com/user-attachments/assets/e4ddd57a-2c44-4852-9863-58a622dcd5b7)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>High traffic-High traffic Module</summary>
 
   > ![high-high](https://github.com/user-attachments/assets/02c1dd60-a5e8-46cd-a522-420773413ea7)
 </details>
 <details>
-  <summary>Detail</summary>
+  <summary>Traffic Selector Module</summary>
 
   > ![traffic selector](https://github.com/user-attachments/assets/9973aa5c-8b99-4c18-9d92-50003fd2a39f)
 </details>
-
+</details>
 </details>
 
 <!-- Fifth Section -->
