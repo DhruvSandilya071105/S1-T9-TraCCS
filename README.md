@@ -142,8 +142,10 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Verilog Code
 <details>
   <summary>Detail</summary>
-
-  > 
+  
+>```verilog
+>  [File Name](path/to/your/file.py)
+>```  
 </details>
 
 ## References
