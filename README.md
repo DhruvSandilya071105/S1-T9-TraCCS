@@ -1,4 +1,4 @@
-# S1-T9-TraCCS
+  # S1-T9-TraCCS
 
 <!-- First Section -->
 ## Team Details
@@ -144,43 +144,43 @@ able solar energy to power the LED’s during daytime with a backup power source
   <summary>Detail</summary>
 ```verilog
   
-  module traffic_light_controller(
-    input wire clk,  // Clock input
-    input wire rst,  // Reset input
-    input wire [1:0] traffic_NS,  // Traffic condition for North-South (00 = low, 01 = moderate, 10 = high)
-    input wire [1:0] traffic_EW,  // Traffic condition for East-West (00 = low, 01 = moderate, 10 = high)
-    output reg [1:0] NS_light,    // 2-bit light for North-South (00 = red, 01 = yellow, 10 = green)
-    output reg [1:0] EW_light     // 2-bit light for East-West (00 = red, 01 = yellow, 10 = green)
-  );
+    module traffic_light_controller(
+      input wire clk,  // Clock input
+      input wire rst,  // Reset input
+      input wire [1:0] traffic_NS,  // Traffic condition for North-South (00 = low, 01 = moderate, 10 = high)
+      input wire [1:0] traffic_EW,  // Traffic condition for East-West (00 = low, 01 = moderate, 10 = high)
+      output reg [1:0] NS_light,    // 2-bit light for North-South (00 = red, 01 = yellow, 10 = green)
+      output reg [1:0] EW_light     // 2-bit light for East-West (00 = red, 01 = yellow, 10 = green)
+      );
 
-  // Traffic conditions
-  localparam LOW = 2'b00;
-  localparam MODERATE = 2'b01;
-  localparam HIGH = 2'b10;
+      // Traffic conditions
+      localparam LOW = 2'b00;
+      localparam MODERATE = 2'b01;
+      localparam HIGH = 2'b10;
 
-  // Timing parameters (assuming units of time as clock cycles)
-  localparam LOW_GREEN = 7;
-  localparam MOD_GREEN = 14;
-  localparam HIGH_GREEN = 21;
-  localparam YELLOW_TIME = 1;
+      // Timing parameters (assuming units of time as clock cycles)
+      localparam LOW_GREEN = 7;
+      localparam MOD_GREEN = 14;
+      localparam HIGH_GREEN = 21;
+      localparam YELLOW_TIME = 1;
 
-  // State definitions
-  localparam RED = 2'b00;
-  localparam YELLOW = 2'b01;
-  localparam GREEN = 2'b10;
+      // State definitions
+      localparam RED = 2'b00;
+      localparam YELLOW = 2'b01;
+      localparam GREEN = 2'b10;
 
-  reg [4:0] counter;  // Counter to manage timing
-  reg [1:0] state;  // 00 = NS green, EW red; 01 = NS yellow, EW red; 10 = NS red, EW green; 11 = NS red, EW yellow
+      reg [4:0] counter;  // Counter to manage timing
+      reg [1:0] state;  // 00 = NS green, EW red; 01 = NS yellow, EW red; 10 = NS red, EW green; 11 = NS red, EW yellow
   
-  always @(posedge clk or posedge rst) begin
-    if (rst) begin
-        // Reset the system
-        counter <= 0;
-        state <= 2'b00;
-        NS_light <= GREEN;
-        EW_light <= RED;
-    end else begin
-        case (state)
+      always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            // Reset the system
+            counter <= 0;
+            state <= 2'b00;
+            NS_light <= GREEN;
+            EW_light <= RED;
+        end else begin
+            case (state)
             2'b00: begin  // NS green, EW red
                 case (traffic_NS)
                     LOW: if (counter < LOW_GREEN) counter <= counter + 1;
@@ -235,7 +235,7 @@ able solar energy to power the LED’s during daytime with a backup power source
     end
     end
 
-  endmodule
+    endmodule
 ```
   ```verilog
     module Traffic_Selector(
