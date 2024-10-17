@@ -143,7 +143,7 @@ able solar energy to power the LED’s during daytime with a backup power source
 <details>
   <summary>Detail</summary>
 ```verilog
-  
+      //BEHAVIORAL
     module traffic_light_controller(
       input wire clk,  // Clock input
       input wire rst,  // Reset input
@@ -237,7 +237,8 @@ able solar energy to power the LED’s during daytime with a backup power source
 
     endmodule
 ```
-  ```verilog
+```verilog
+    //GATE LEVEL
     module Traffic_Selector(
     input NS1, NS2, EW1, EW2,   // Inputs corresponding to the traffic signals
     output O1, O2, O3, O4, O5, O6, O7, O8, O9  // Outputs based on the logic given
@@ -888,7 +889,7 @@ able solar energy to power the LED’s during daytime with a backup power source
     endmodule
 ```
 ```verilog
-
+    //TESTBENCH
     module traffic_light_tb();
 
     // Testbench signals
