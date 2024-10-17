@@ -469,52 +469,52 @@ able solar energy to power the LED’s during daytime with a backup power source
     not (notE, E);
     and (W0, notB, notC, notD, notE);  // Now W0 corresponds to N0
 
-// Logic for North-South light (originally for East-West)
-and (N1, A, or1);  // Now N1 corresponds to W1
-and (N0, notB, notC, notD, notE);  // Now N0 corresponds to W0
+    // Logic for North-South light (originally for East-West)
+    and (N1, A, or1);  // Now N1 corresponds to W1
+    and (N0, notB, notC, notD, notE);  // Now N0 corresponds to W0
 
-endmodule
+    endmodule
 
 
-//3)LOW-HIGH
-module low_high(
+    //3)LOW-HIGH
+    module low_high(
     input wire A, B, C, D, E, F, // Inputs
     output wire N1, N0, W1, W0   // Outputs
-);
+    );
 
-// Internal wires
-wire not_A, not_B, not_C, not_D, not_E;
-wire or_AB, or_ACDE, or_CDE, and_N0, and_W0, and_W1_temp, and_N1_temp;
+    // Internal wires
+    wire not_A, not_B, not_C, not_D, not_E;
+    wire or_AB, or_ACDE, or_CDE, and_N0, and_W0, and_W1_temp, and_N1_temp;
 
-// Negate inputs
-not U1(not_A, A);
-not U2(not_B, B);
-not U3(not_C, C);
-not U4(not_D, D);
-not U5(not_E, E);
+    // Negate inputs
+    not U1(not_A, A);
+    not U2(not_B, B);
+    not U3(not_C, C);
+    not U4(not_D, D);
+    not U5(not_E, E);
 
-// W1 = (A + B)(A + C + D + E) (originally N1)
-or  U6(or_AB, A, B);              // or_AB = A + B
-or  U7(or_ACDE, A, C, D, E);      // or_ACDE = A + C + D + E
-and U8(W1, or_AB, or_ACDE);       // W1 = (A + B)(A + C + D + E)
+    // W1 = (A + B)(A + C + D + E) (originally N1)
+    or  U6(or_AB, A, B);              // or_AB = A + B
+    or  U7(or_ACDE, A, C, D, E);      // or_ACDE = A + C + D + E
+    and U8(W1, or_AB, or_ACDE);       // W1 = (A + B)(A + C + D + E)
 
-// W0 = ~A . ~C . ~D . ~E (originally N0)
-and U9(and_W0, not_A, not_C, not_D, not_E);
-assign W0 = and_W0;               // W0 = ~A . ~C . ~D . ~E
+    // W0 = ~A . ~C . ~D . ~E (originally N0)
+    and U9(and_W0, not_A, not_C, not_D, not_E);
+    assign W0 = and_W0;               // W0 = ~A . ~C . ~D . ~E
 
-// N1 = ~A . ~B(C + D + E) (originally W1)
-or  U10(or_CDE, C, D, E);         // or_CDE = C + D + E
-and U11(and_N1_temp, not_A, not_B, or_CDE); // and_N1_temp = ~A . ~B(C + D + E)
-assign N1 = and_N1_temp;          // N1 = ~A . ~B(C + D + E)
+    // N1 = ~A . ~B(C + D + E) (originally W1)
+    or  U10(or_CDE, C, D, E);         // or_CDE = C + D + E
+    and U11(and_N1_temp, not_A, not_B, or_CDE); // and_N1_temp = ~A . ~B(C + D + E)
+    assign N1 = and_N1_temp;          // N1 = ~A . ~B(C + D + E)
 
-// N0 = ~A . ~C . ~D . ~E (originally W0)
-assign N0 = and_W0;               // N0 = ~A . ~C . ~D . ~E
+    // N0 = ~A . ~C . ~D . ~E (originally W0)
+    assign N0 = and_W0;               // N0 = ~A . ~C . ~D . ~E
 
-endmodule
+    endmodule
 
 
-//4)MODERATE-LOW
-module mod_low(
+    //4)MODERATE-LOW
+    module mod_low(
     input A,
     input B,
     input C,
@@ -525,34 +525,34 @@ module mod_low(
     output N0,
     output W1,
     output W0
-);
+    );
 
-// Intermediate signals
-wire notA;
-wire notB;
-wire notC;
-wire notD;
-wire notE;
-wire or1;
+    // Intermediate signals
+    wire notA;
+    wire notB;
+    wire notC;
+    wire notD;
+    wire notE;
+    wire or1;
 
-// Logic for North-South light
-not (notA, A);
-or (or1, B, C, D, E);
-and (N1, notA, or1);
-not (notB, B);
-not (notC, C);
-not (notD, D);
-not (notE, E);
-and (N0, notB, notC, notD, notE);
+    // Logic for North-South light
+    not (notA, A);
+    or (or1, B, C, D, E);
+    and (N1, notA, or1);
+    not (notB, B);
+    not (notC, C);
+    not (notD, D);
+    not (notE, E);
+    and (N0, notB, notC, notD, notE);
 
-// Logic for East-West light
-and (W1, A, or1); // Reusing or1 for W1
-and (W0, notB, notC, notD, notE); // Reusing the same not gates
+    // Logic for East-West light
+    and (W1, A, or1); // Reusing or1 for W1
+    and (W0, notB, notC, notD, notE); // Reusing the same not gates
 
-endmodule
+    endmodule
 
-//5)MODERATE-MODERATE
-module mod_mod(
+    //5)MODERATE-MODERATE
+    module mod_mod(
     input A,
     input B,
     input C,
@@ -562,7 +562,7 @@ module mod_mod(
     output N0,
     output W1,
     output W0
-);
+    );
 
     // Intermediate wires
     wire B_or_C_or_D_or_E;
@@ -603,13 +603,13 @@ module mod_mod(
     or or4 (tempW0, (notB & notC & notD & notE), notB_and_C_and_D_and_E);
     not not7 (W0, tempW0);
 
-endmodule
+    endmodule
 
-//6)MODERATE-HIGH
-module mod_high(
+    //6)MODERATE-HIGH
+    module mod_high(
     input A, B, C, D, E, F,
     output N1, N0, W1, W0
-);
+    );
     wire notA, notB, notC, notD, notE, notF;
     wire term1, term2, term3, term4, term5, term6;
     
@@ -644,51 +644,51 @@ module mod_high(
     or (W1, A, B);
     assign W0 = N0;
 
-endmodule
+    endmodule
 
 
-//7)HIGH-LOW
-module high_low(
+    //7)HIGH-LOW
+    module high_low(
     input wire A, B, C, D, E, F, // Inputs
     output wire N1, N0, W1, W0   // Outputs
-);
+    );
 
-// Internal wires
-wire not_A, not_B, not_C, not_D, not_E;
-wire or_AB, or_ACDE, or_CDE, and_N0, and_W0, and_W1_temp, and_N1_temp;
+    // Internal wires
+    wire not_A, not_B, not_C, not_D, not_E;
+    wire or_AB, or_ACDE, or_CDE, and_N0, and_W0, and_W1_temp, and_N1_temp;
 
-// Negate inputs
-not U1(not_A, A);
-not U2(not_B, B);
-not U3(not_C, C);
-not U4(not_D, D);
-not U5(not_E, E);
+    // Negate inputs
+    not U1(not_A, A);
+    not U2(not_B, B);
+    not U3(not_C, C);
+    not U4(not_D, D);
+    not U5(not_E, E);
 
-// N1 = (A + B)(A + C + D + E)
-or  U6(or_AB, A, B);              // or_AB = A + B
-or  U7(or_ACDE, A, C, D, E);      // or_ACDE = A + C + D + E
-and U8(N1, or_AB, or_ACDE);       // N1 = (A + B)(A + C + D + E)
+    // N1 = (A + B)(A + C + D + E)
+    or  U6(or_AB, A, B);              // or_AB = A + B
+    or  U7(or_ACDE, A, C, D, E);      // or_ACDE = A + C + D + E
+    and U8(N1, or_AB, or_ACDE);       // N1 = (A + B)(A + C + D + E)
 
-// N0 = ~A . ~C . ~D . ~E
-and U9(and_N0, not_A, not_C, not_D, not_E);
-assign N0 = and_N0;               // N0 = ~A . ~C . ~D . ~E
+    // N0 = ~A . ~C . ~D . ~E
+    and U9(and_N0, not_A, not_C, not_D, not_E);
+    assign N0 = and_N0;               // N0 = ~A . ~C . ~D . ~E
 
-// W1 = ~A . ~B(C + D + E)
-or  U10(or_CDE, C, D, E);         // or_CDE = C + D + E
-and U11(and_W1_temp, not_A, not_B, or_CDE); // and_W1_temp = ~A . ~B(C + D + E)
-assign W1 = and_W1_temp;          // W1 = ~A . ~B(C + D + E)
+    // W1 = ~A . ~B(C + D + E)
+    or  U10(or_CDE, C, D, E);         // or_CDE = C + D + E
+    and U11(and_W1_temp, not_A, not_B, or_CDE); // and_W1_temp = ~A . ~B(C + D + E)
+    assign W1 = and_W1_temp;          // W1 = ~A . ~B(C + D + E)
 
-// W0 = ~A . ~C . ~D . ~E (same as N0)
-assign W0 = and_N0;               // W0 = ~A . ~C . ~D . ~E
+    // W0 = ~A . ~C . ~D . ~E (same as N0)
+    assign W0 = and_N0;               // W0 = ~A . ~C . ~D . ~E
 
-endmodule
+    endmodule
 
 
-//8)HIGH MODERATE
-module high_mod(
+    //8)HIGH MODERATE
+    module high_mod(
     input A, B, C, D, E, F,
     output N1, N0, W1, W0
-);
+    );
     wire notA, notB, notC, notD, notE, notF;
     wire term1, term2, term3, term4, term5, term6;
 
@@ -723,12 +723,12 @@ module high_mod(
     or (W1, A, B);
     assign W0 = N0;
 
-endmodule
+    endmodule
 
 
 
-//9)HIGH-HIGH
-module high_high(
+    //9)HIGH-HIGH
+    module high_high(
     input A,
     input B,
     input C,
@@ -739,7 +739,7 @@ module high_high(
     output N0,
     output W1,
     output W0
-);
+    );
 
     // Intermediate wires
     wire B_or_C_or_D_or_E_or_F;
@@ -791,7 +791,7 @@ module high_high(
     or or7 (tempW0, A_and_B_and_C_and_D_and_E_and_F, (notB & (notC & D & notF) & notA));
     not not8 (W0, tempW0);
 
-endmodule
+    endmodule
 ```
 ```verilog
 
