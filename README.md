@@ -142,7 +142,7 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Verilog Code
 <details>
   <summary>Detail</summary>
-  >```verilog
+```verilog
 module Traffic_Selector(
     input NS1, NS2, EW1, EW2,   // Inputs corresponding to the traffic signals
     output O1, O2, O3, O4, O5, O6, O7, O8, O9  // Outputs based on the logic given
