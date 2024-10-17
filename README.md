@@ -142,8 +142,6 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Verilog Code
 <details>
   <summary>Detail</summary>
-<details>
-  <summary>Behavioral Model</summary>
 ```verilog
   module traffic_light_controller(
     input wire clk,  // Clock input
@@ -237,10 +235,7 @@ always @(posedge clk or posedge rst) begin
 end
 
 endmodule
-```</details>
-
-<details>
-  <summary>Gate Level Model</summary>
+```
 ```verilog
 module Traffic_Selector(
     input NS1, NS2, EW1, EW2,   // Inputs corresponding to the traffic signals
@@ -891,10 +886,7 @@ module high_high(
     not not8 (W0, tempW0);
 
 endmodule
-```</details>
-
-<details>
-<summary>Testbench</summary>
+```
 ```verilog
   module traffic_light_tb();
 
@@ -977,12 +969,7 @@ initial begin
 end
 
 endmodule
-```</details>
-
-<details>
-  <summary>Output</summary>
->
-</details>
+```
 </details>
 
 ## References
