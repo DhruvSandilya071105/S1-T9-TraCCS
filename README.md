@@ -72,6 +72,7 @@ able solar energy to power the LED’s during daytime with a backup power source
 >>Cycle Repeats: The process repeats, adjusting the green light duration for each direction according to the real-time traffic conditions.
 
 >>NOTE : For an invalid input we feeded the system to take the M-M, Moderate-Moderate Value of Traffic.
+>><img width="306" alt="s1-traccs-func" src="https://github.com/user-attachments/assets/d137744e-9d2f-4cc5-9257-482aa620f9f9">
 </details>
 
 <!-- Fourth Section -->
