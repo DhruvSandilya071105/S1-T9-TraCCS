@@ -143,8 +143,8 @@ able solar energy to power the LED’s during daytime with a backup power source
 <details>
   <summary>Detail</summary>
   
->```verilog
->  module traffic_light_controller(
+```verilog
+  module traffic_light_controller(
     input wire clk,  // Clock input
     input wire rst,  // Reset input
     input wire [1:0] traffic_NS,  // Traffic condition for North-South (00 = low, 01 = moderate, 10 = high)
@@ -236,9 +236,7 @@ always @(posedge clk or posedge rst) begin
 end
 
 endmodule
-
-
->```  
+```  
 </details>
 
 ## References
