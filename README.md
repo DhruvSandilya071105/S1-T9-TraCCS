@@ -142,7 +142,8 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Verilog Code
 <details>
   <summary>Detail</summary>
-```verilog
+  ```verilog
+  
     module Traffic_Selector(
     input NS1, NS2, EW1, EW2,   // Inputs corresponding to the traffic signals
     output O1, O2, O3, O4, O5, O6, O7, O8, O9  // Outputs based on the logic given
@@ -271,7 +272,7 @@ able solar energy to power the LED’s during daytime with a backup power source
     input enable,       // Enable signal (when 1, counting is enabled)
     input up_down,      // Up/Down control (1 = Up, 0 = Down)
     output A, B, C, D   // 4-bit output (A is MSB, D is LSB)
-);
+    );
 
     wire qA, qB, qC, qD;    // Outputs of flip-flops
     wire dA, dB, dC, dD;    // D inputs for the flip-flops
@@ -450,7 +451,432 @@ able solar energy to power the LED’s during daytime with a backup power source
     output N1,  // North-South light (formerly W1)
     output N0   // North-South light (formerly W0)
     );
+    // Intermediate signals
+    wire notA;
+    wire notB;
+    wire notC;
+    wire notD;
+    wire notE;
+    wire or1;
 
+    // Logic for East-West light (originally for North-South)
+    not (notA, A);
+    or (or1, B, C, D, E);
+    and (W1, notA, or1);  // Now W1 corresponds to N1
+    not (notB, B);
+    not (notC, C);
+    not (notD, D);
+    not (notE, E);
+    and (W0, notB, notC, notD, notE);  // Now W0 corresponds to N0
+
+// Logic for North-South light (originally for East-West)
+and (N1, A, or1);  // Now N1 corresponds to W1
+and (N0, notB, notC, notD, notE);  // Now N0 corresponds to W0
+
+endmodule
+
+
+//3)LOW-HIGH
+module low_high(
+    input wire A, B, C, D, E, F, // Inputs
+    output wire N1, N0, W1, W0   // Outputs
+);
+
+// Internal wires
+wire not_A, not_B, not_C, not_D, not_E;
+wire or_AB, or_ACDE, or_CDE, and_N0, and_W0, and_W1_temp, and_N1_temp;
+
+// Negate inputs
+not U1(not_A, A);
+not U2(not_B, B);
+not U3(not_C, C);
+not U4(not_D, D);
+not U5(not_E, E);
+
+// W1 = (A + B)(A + C + D + E) (originally N1)
+or  U6(or_AB, A, B);              // or_AB = A + B
+or  U7(or_ACDE, A, C, D, E);      // or_ACDE = A + C + D + E
+and U8(W1, or_AB, or_ACDE);       // W1 = (A + B)(A + C + D + E)
+
+// W0 = ~A . ~C . ~D . ~E (originally N0)
+and U9(and_W0, not_A, not_C, not_D, not_E);
+assign W0 = and_W0;               // W0 = ~A . ~C . ~D . ~E
+
+// N1 = ~A . ~B(C + D + E) (originally W1)
+or  U10(or_CDE, C, D, E);         // or_CDE = C + D + E
+and U11(and_N1_temp, not_A, not_B, or_CDE); // and_N1_temp = ~A . ~B(C + D + E)
+assign N1 = and_N1_temp;          // N1 = ~A . ~B(C + D + E)
+
+// N0 = ~A . ~C . ~D . ~E (originally W0)
+assign N0 = and_W0;               // N0 = ~A . ~C . ~D . ~E
+
+endmodule
+
+
+//4)MODERATE-LOW
+module mod_low(
+    input A,
+    input B,
+    input C,
+    input D,
+    input E,
+    input F,
+    output N1,
+    output N0,
+    output W1,
+    output W0
+);
+
+// Intermediate signals
+wire notA;
+wire notB;
+wire notC;
+wire notD;
+wire notE;
+wire or1;
+
+// Logic for North-South light
+not (notA, A);
+or (or1, B, C, D, E);
+and (N1, notA, or1);
+not (notB, B);
+not (notC, C);
+not (notD, D);
+not (notE, E);
+and (N0, notB, notC, notD, notE);
+
+// Logic for East-West light
+and (W1, A, or1); // Reusing or1 for W1
+and (W0, notB, notC, notD, notE); // Reusing the same not gates
+
+endmodule
+
+//5)MODERATE-MODERATE
+module mod_mod(
+    input A,
+    input B,
+    input C,
+    input D,
+    input E,
+    output N1,
+    output N0,
+    output W1,
+    output W0
+);
+
+    // Intermediate wires
+    wire B_or_C_or_D_or_E;
+    wire notB, notC, notD, notE;
+    wire notB_and_C_and_D_and_E;
+    
+    // Calculate (B + C + D + E)
+    or or1 (B_or_C_or_D_or_E, B, C, D, E);
+    
+    // Calculate NOTs for B, C, D, and E
+    not not1 (notB, B);
+    not not2 (notC, C);
+    not not3 (notD, D);
+    not not4 (notE, E);
+    
+    // Calculate (~B + ~C + ~D + ~E)
+    wire notB_or_notC_or_notD_or_notE;
+    or or2 (notB_or_notC_or_notD_or_notE, notB, notC, notD, notE);
+    
+    // Calculate (B.C.D.E)
+    and and1 (notB_and_C_and_D_and_E, B, C, D, E);
+    
+    // Calculate N1
+    wire tempN1;
+    and and2 (tempN1, notB_or_notC_or_notD_or_notE, B_or_C_or_D_or_E);
+    not not5 (N1, tempN1);
+    
+    // Calculate N0
+    wire tempN0;
+    or or3 (tempN0, (notB & notC & notD & notE), notB_and_C_and_D_and_E);
+    not not6 (N0, tempN0);
+    
+    // Assign W1
+    assign W1 = A;
+    
+    // Calculate W0
+    wire tempW0;
+    or or4 (tempW0, (notB & notC & notD & notE), notB_and_C_and_D_and_E);
+    not not7 (W0, tempW0);
+
+endmodule
+
+//6)MODERATE-HIGH
+module mod_high(
+    input A, B, C, D, E, F,
+    output N1, N0, W1, W0
+);
+    wire notA, notB, notC, notD, notE, notF;
+    wire term1, term2, term3, term4, term5, term6;
+    
+    not (notA, A);
+    not (notB, B);
+    not (notC, C);
+    not (notD, D);
+    not (notE, E);
+    not (notF, F);
+
+    wire T1, T2, T3, T4, T5;
+    
+    or (T1, A, C, D, E, F);
+    or (T2, A, notC, notD, notE, notF);
+    or (T3, A, notB);
+    or (T4, notA, B, C, D);
+    or (T5, notA, B, C, E, F);
+
+    and (N1, T1, T2, T3, T4, T5);
+
+    wire termAB, termAC, termADE, termADF, term5, term6;
+    
+    and (termAB, A, B);
+    and (termAC, A, C);
+    and (termADE, A, D, E);
+    and (termADF, A, D, F);
+    and (term5, notB, C, D, E, F);
+    and (term6, notA, notB, notC, notD, notE, notF);
+
+    or (N0, termAB, termAC, termADE, termADF, term5, term6);
+
+    or (W1, A, B);
+    assign W0 = N0;
+
+endmodule
+
+
+//7)HIGH-LOW
+module high_low(
+    input wire A, B, C, D, E, F, // Inputs
+    output wire N1, N0, W1, W0   // Outputs
+);
+
+// Internal wires
+wire not_A, not_B, not_C, not_D, not_E;
+wire or_AB, or_ACDE, or_CDE, and_N0, and_W0, and_W1_temp, and_N1_temp;
+
+// Negate inputs
+not U1(not_A, A);
+not U2(not_B, B);
+not U3(not_C, C);
+not U4(not_D, D);
+not U5(not_E, E);
+
+// N1 = (A + B)(A + C + D + E)
+or  U6(or_AB, A, B);              // or_AB = A + B
+or  U7(or_ACDE, A, C, D, E);      // or_ACDE = A + C + D + E
+and U8(N1, or_AB, or_ACDE);       // N1 = (A + B)(A + C + D + E)
+
+// N0 = ~A . ~C . ~D . ~E
+and U9(and_N0, not_A, not_C, not_D, not_E);
+assign N0 = and_N0;               // N0 = ~A . ~C . ~D . ~E
+
+// W1 = ~A . ~B(C + D + E)
+or  U10(or_CDE, C, D, E);         // or_CDE = C + D + E
+and U11(and_W1_temp, not_A, not_B, or_CDE); // and_W1_temp = ~A . ~B(C + D + E)
+assign W1 = and_W1_temp;          // W1 = ~A . ~B(C + D + E)
+
+// W0 = ~A . ~C . ~D . ~E (same as N0)
+assign W0 = and_N0;               // W0 = ~A . ~C . ~D . ~E
+
+endmodule
+
+
+//8)HIGH MODERATE
+module high_mod(
+    input A, B, C, D, E, F,
+    output N1, N0, W1, W0
+);
+    wire notA, notB, notC, notD, notE, notF;
+    wire term1, term2, term3, term4, term5, term6;
+
+    not (notA, A);
+    not (notB, B);
+    not (notC, C);
+    not (notD, D);
+    not (notE, E);
+    not (notF, F);
+
+    wire T1, T2, T3, T4, T5;
+
+    or (T1, A, C, D, E, F);
+    or (T2, A, notC, notD, notE, notF);
+    or (T3, A, notB);
+    or (T4, notA, B, C, D);
+    or (T5, notA, B, C, E, F);
+
+    and (N1, T1, T2, T3, T4, T5);
+
+    wire termAB, termAC, termADE, termADF, term5, term6;
+
+    and (termAB, A, B);
+    and (termAC, A, C);
+    and (termADE, A, D, E);
+    and (termADF, A, D, F);
+    and (term5, notB, C, D, E, F);
+    and (term6, notA, notB, notC, notD, notE, notF);
+
+    or (N0, termAB, termAC, termADE, termADF, term5, term6);
+
+    or (W1, A, B);
+    assign W0 = N0;
+
+endmodule
+
+
+
+//9)HIGH-HIGH
+module high_high(
+    input A,
+    input B,
+    input C,
+    input D,
+    input E,
+    input F,
+    output N1,
+    output N0,
+    output W1,
+    output W0
+);
+
+    // Intermediate wires
+    wire B_or_C_or_D_or_E_or_F;
+    wire notB, notC, notD, notE, notF;
+    wire notB_or_notD_or_notE;
+    wire notB_or_notC;
+    wire and1, and2, and3, and4;
+    wire A_and_B_and_C_and_D_and_E_and_F;
+
+    // Calculate (B + C + D + E + F)
+    or or1 (B_or_C_or_D_or_E_or_F, B, C, D, E, F);
+    
+    // Calculate NOTs for B, C, D, E, and F
+    not not1 (notB, B);
+    not not2 (notC, C);
+    not not3 (notD, D);
+    not not4 (notE, E);
+    not not5 (notF, F);
+    
+    // Calculate (~B + ~D + ~E)
+    or or2 (notB_or_notD_or_notE, notB, notD, notE);
+    
+    // Calculate (~B + ~C)
+    or or3 (notB_or_notC, notB, notC);
+    
+    // Calculate A AND B AND C AND D AND E AND F
+    and and5 (A_and_B_and_C_and_D_and_E_and_F, A, B, C, D, E, F);
+    
+    // Calculate N1
+    wire tempN1;
+    and and6 (and1, B_or_C_or_D_or_E_or_F, notB_or_notD_or_notE);
+    and and7 (and2, and1, notB_or_notC);
+    not not6 (tempN1, A); // ~A
+    and and8 (N1, and2, tempN1);
+    
+    // Calculate N0
+    wire tempN0;
+    or or4 (tempN0, A_and_B_and_C_and_D_and_E_and_F, (notB & (notC & D & notF) & notA));
+    not not7 (N0, tempN0);
+
+    // Calculate W1
+    wire andBDEF, andBC, orW1;
+    and and9 (andBDEF, B, D, E, F);
+    and and10 (andBC, B, C);
+    or or5 (orW1, andBDEF, andBC);
+    or or6 (W1, orW1, A);
+
+    // Calculate W0 (same as N0 in this case)
+    or or7 (tempW0, A_and_B_and_C_and_D_and_E_and_F, (notB & (notC & D & notF) & notA));
+    not not8 (W0, tempW0);
+
+endmodule
+```
+```verilog
+
+    module traffic_light_tb();
+
+    // Testbench signals
+    reg clk;
+    reg rst;
+    reg [1:0] traffic_NS;  // Traffic condition for North-South
+    reg [1:0] traffic_EW;  // Traffic condition for East-West
+    wire [1:0] NS_light;   // Output light for North-South
+    wire [1:0] EW_light;   // Output light for East-West
+
+    // Instantiate the traffic light controller module
+    traffic_light_controller uut (
+    .clk(clk),
+    .rst(rst),
+    .traffic_NS(traffic_NS),
+    .traffic_EW(traffic_EW),
+    .NS_light(NS_light),
+    .EW_light(EW_light)
+    );
+
+    always begin
+    clk=0;
+    
+    forever #5 clk = ~clk;
+    end
+
+    initial begin
+    rst = 1;
+    #10 rst = 0; 
+
+    // Test Case 1: Low Traffic on both North-South and East-West
+    traffic_NS = 2'b00; 
+    traffic_EW = 2'b00;  // Both Low
+    #200;
+
+    // Test Case 2: Moderate Traffic on North-South, Low Traffic on East-West
+    traffic_NS = 2'b01; 
+    traffic_EW = 2'b00;  // NS Moderate, EW Low
+    #200;
+
+    // Test Case 3: High Traffic on North-South, Low Traffic on East-West
+    traffic_NS = 2'b10; 
+    traffic_EW = 2'b00;  // NS High, EW Low
+    #300;
+
+    // Test Case 4: Low Traffic on North-South, Moderate Traffic on East-West
+    traffic_NS = 2'b00; 
+    traffic_EW = 2'b01;  // NS Low, EW Moderate
+    #200;
+    // Test Case 5: Low Traffic on North-South, High Traffic on East-West
+    traffic_NS = 2'b00;
+    traffic_EW = 2'b10;  // NS Low, EW High
+    #300;
+
+    // Test Case 6: High Traffic on both North-South and East-West
+    traffic_NS = 2'b10; 
+    traffic_EW = 2'b10;  // Both High
+    #400;
+
+    // Test Case 7: Moderate Traffic on both North-South and East-West
+    traffic_NS = 2'b01; 
+    traffic_EW = 2'b01;  // Both Moderate
+    #300;
+
+    // Test Case 8: Reset the system and restart
+    rst = 1;  // Activate reset
+    #10 rst = 0;  // Release reset
+    traffic_NS = 2'b00; 
+    traffic_EW = 2'b00;  // Restart with low traffic
+    #200;
+
+
+    $stop;  // End simulation
+    end
+
+    initial begin
+    $monitor("At time %t: NS_light = %b, EW_light = %b, traffic_NS = %b, traffic_EW = %b", 
+             $time, NS_light, EW_light, traffic_NS, traffic_EW);
+    end
+
+    endmodule
+```
 
 
 </details>
