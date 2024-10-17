@@ -142,7 +142,8 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Verilog Code
 <details>
   <summary>Detail</summary>
-```python
+```verilog
+  
   module traffic_light_controller(
     input wire clk,  // Clock input
     input wire rst,  // Reset input
