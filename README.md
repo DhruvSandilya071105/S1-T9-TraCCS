@@ -237,8 +237,8 @@ always @(posedge clk or posedge rst) begin
 end
 
 endmodule
-```
-</details>
+```</details>
+
 <details>
   <summary>Gate Level Model</summary>
 ```verilog
@@ -704,8 +704,6 @@ module mod_mod(
 
 endmodule
 
-
-
 //6)MODERATE-HIGH
 module mod_high(
     input A, B, C, D, E, F,
@@ -893,10 +891,10 @@ module high_high(
     not not8 (W0, tempW0);
 
 endmodule
-```
-</details>
+```</details>
+
 <details>
-  <summary>Testbench</summary>
+<summary>Testbench</summary>
 ```verilog
   module traffic_light_tb();
 
@@ -979,8 +977,8 @@ initial begin
 end
 
 endmodule
-```
-</details>
+```</details>
+
 <details>
   <summary>Output</summary>
 >
