@@ -233,9 +233,9 @@ able solar energy to power the LED’s during daytime with a backup power source
             end
         endcase
     end
-  end
+    end
 
-endmodule
+  endmodule
 ```
   ```verilog
     module Traffic_Selector(
