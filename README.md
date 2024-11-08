@@ -979,32 +979,6 @@ able solar energy to power the LED’s during daytime with a backup power source
 
 </details>
 
-## References
-<details>
-  <summary>Detail</summary>
-  
-> Digital Design *M. Morris Mano, Michael D. Ciletti*
-> 
-  >[(Digital Design PDF)](http://surl.li/avkgxx)
->
-> NOC *Hardware modeling using verilog, IIT Kharagpur*
-> 
-   >[(NPTEL Lectures)](https://nptel.ac.in/courses/106/105/106105165/)
->
-> 555 Timer IC : Types, Construction, Working & Application
-> 
-   >[(555 Timer IC)](https://www.electricaltechnology.org/2014/12/555-timer.html)
-> 
-> Four Way Traffic Lights Circuit using 555 Timer IC
-> 
-   >[(www.circuitdigest.com/)](https://circuitdigest.com/electronic-circuits/four-way-traffic-light-circuit)
->
-> Four Way Traffic Light Circuit
-> 
-   >[(www.circuits-diy.com)](https://www.circuits-diy.com/four-way-traffic-light-circuit/)
-   
-</details>
-
 ## Hardware Implementation
 <details>
   <summary>Detail</summary>
@@ -1059,3 +1033,31 @@ The Light Module is a combinational circuit that displays lights using a 2-bit b
 This output format allows for a straightforward display and control of the lights at the intersection.
 
 </details>
+
+## References
+<details>
+  <summary>Detail</summary>
+  
+> Digital Design *M. Morris Mano, Michael D. Ciletti*
+> 
+  >[(Digital Design PDF)](http://surl.li/avkgxx)
+>
+> NOC *Hardware modeling using verilog, IIT Kharagpur*
+> 
+   >[(NPTEL Lectures)](https://nptel.ac.in/courses/106/105/106105165/)
+>
+> 555 Timer IC : Types, Construction, Working & Application
+> 
+   >[(555 Timer IC)](https://www.electricaltechnology.org/2014/12/555-timer.html)
+> 
+> Four Way Traffic Lights Circuit using 555 Timer IC
+> 
+   >[(www.circuitdigest.com/)](https://circuitdigest.com/electronic-circuits/four-way-traffic-light-circuit)
+>
+> Four Way Traffic Light Circuit
+> 
+   >[(www.circuits-diy.com)](https://www.circuits-diy.com/four-way-traffic-light-circuit/)
+   
+</details>
+
+
