@@ -1038,6 +1038,7 @@ This output format allows for a straightforward display and control of the light
 
 <details>
   <summary>Circuit Diagram</summary>
+  ![S1-T9_HardwareCircuit](https://github.com/user-attachments/assets/90ac5a13-53b8-46a8-83a6-c0416762bf91)
 </details>
 </details>
 
