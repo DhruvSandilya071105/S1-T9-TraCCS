@@ -1008,51 +1008,54 @@ able solar energy to power the LED’s during daytime with a backup power source
 ## Hardware Implementation
 <details>
   <summary>Overview</summary>
-  We have implemented a scaled-down version of the full project in our hardware model. The components include:
-\begin{itemize}
-    \item \textbf{Traffic Selector Module} - selects a suitable submodule based on the traffic flow density.
-    \item \textbf{Traffic Flow Modules} - nine software-implemented submodules to handle various traffic flows. However, in the hardware model, we implemented only the Low-Low traffic module due to time and component constraints.
-    \item \textbf{Light Module} - produces signals for Green, Yellow, and Red lights at a 4-way intersection.
-\end{itemize}
+# Traffic Control Hardware Model
 
-\subsection{Traffic Selector Module}
-The Traffic Selector Module accepts 4-bit inputs, where:
-\begin{itemize}
-    \item The first 2 bits represent the North-South (NS) road.
-    \item The last 2 bits represent the East-West (EW) road.
-\end{itemize}
+This project is a scaled-down version of a full traffic control system, implemented as a hardware model. The system components include modules for selecting traffic flow, controlling lights, and managing traffic density at a 4-way intersection.
 
-The bit representation for traffic levels is:
-\begin{itemize}
-    \item \texttt{00} - Low Traffic
-    \item \texttt{01} - Moderate Traffic
-    \item \texttt{10} - High Traffic
-\end{itemize}
+## Components
 
-In the hardware model, we implemented only the Low-Low traffic submodule (both NS and EW roads have low traffic). Therefore, when the input is \texttt{0000}, the Traffic Selector Module activates the Low-Low traffic submodule.
+- **Traffic Selector Module** - Selects an appropriate submodule based on traffic flow density.
+- **Traffic Flow Modules** - Contains nine software-implemented submodules for different traffic flow scenarios. In this hardware model, we implemented only the Low-Low traffic module due to time and component limitations.
+- **Light Module** - Controls signals for Green, Yellow, and Red lights at the intersection.
 
-\subsection{Low-Low Module}
-The Low-Low Module controls the traffic lights for low-density traffic. This is achieved by constructing a 4-bit down counter using two 7476 ICs (JK Flip-Flops).
+---
 
-\subsubsection{Light Timing}
-\begin{itemize}
-    \item NS road receives a green light for 7 seconds, while EW stays red.
-    \item Both roads display yellow for 1 second.
-    \item EW road receives a green light for 7 seconds, while NS stays red.
-\end{itemize}
+### Traffic Selector Module
+
+The Traffic Selector Module uses a 4-bit input:
+- The first 2 bits represent the North-South (NS) road.
+- The last 2 bits represent the East-West (EW) road.
+
+Traffic levels are encoded as follows:
+- `00` - Low Traffic
+- `01` - Moderate Traffic
+- `10` - High Traffic
+
+In this hardware model, we only implemented the Low-Low traffic submodule (low traffic on both NS and EW roads). When the input is `0000`, the Traffic Selector Module activates the Low-Low traffic submodule.
+
+---
+
+### Low-Low Module
+
+The Low-Low Module controls traffic lights for low-density traffic using a 4-bit down counter constructed with two 7476 ICs (JK Flip-Flops).
+
+#### Light Timing
+- **NS road** receives a green light for 7 seconds, while EW stays red.
+- **Both roads** display yellow for 1 second.
+- **EW road** receives a green light for 7 seconds, while NS stays red.
 
 The total cycle time for the lights is:
-\[
-7 \text{ seconds (Green)} + 1 \text{ second (Yellow)} + 7 \text{ seconds (Red)} + 1 \text{ second (Yellow)} = 16 \text{ seconds}
-\]
+7 seconds (Green) + 1 second (Yellow) + 7 seconds (Red) + 1 second (Yellow) = 16 seconds
 
-\subsection{Light Module}
-A combinational circuit in the Light Module displays the lights as a 2-bit binary output for each road:
-\begin{itemize}
-    \item \texttt{00} - Red Light
-    \item \texttt{01} - Yellow Light
-    \item \texttt{10} - Green Light
-\end{itemize}
+---
 
-This output enables a straightforward display and control for the four-way intersection lights.
+### Light Module
+
+The Light Module is a combinational circuit that displays lights using a 2-bit binary output for each road:
+- `00` - Red Light
+- `01` - Yellow Light
+- `10` - Green Light
+
+This output format allows for a straightforward display and control of the lights at the intersection.
+
 </details>
