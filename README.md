@@ -1007,8 +1007,9 @@ able solar energy to power the LED’s during daytime with a backup power source
 
 ## Hardware Implementation
 <details>
-  <summary>Traffic Control Hardware Model</summary>
-
+  <summary>Detail</summary>
+  
+## Overview
 This project is a scaled-down version of a full traffic control system, implemented as a hardware model. The system components include modules for selecting traffic flow, controlling lights, and managing traffic density at a 4-way intersection.
 
 ## Components
