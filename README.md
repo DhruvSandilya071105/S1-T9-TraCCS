@@ -1040,6 +1040,7 @@ This output format allows for a straightforward display and control of the light
   <summary>Circuit Diagram</summary>
 </details>
 </details>
+
 ## References
 <details>
   <summary>Detail</summary>
