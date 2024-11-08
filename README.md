@@ -1004,3 +1004,8 @@ able solar energy to power the LED’s during daytime with a backup power source
    >[(www.circuits-diy.com)](https://www.circuits-diy.com/four-way-traffic-light-circuit/)
    
 </details>
+
+## Hardware Implementation
+<details>
+  <summary>Overview</summary>
+</details>
