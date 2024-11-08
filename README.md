@@ -981,6 +981,8 @@ able solar energy to power the LED’s during daytime with a backup power source
 
 ## Hardware Implementation
 <details>
+  <summary>Detail</summary>
+<details>
   <summary>Hardware Model Design</summary>
   
 ## Overview
@@ -1037,7 +1039,7 @@ This output format allows for a straightforward display and control of the light
 <details>
   <summary>Circuit Diagram</summary>
 </details>
-
+</details>
 ## References
 <details>
   <summary>Detail</summary>
